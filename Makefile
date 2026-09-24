@@ -15,4 +15,4 @@ mksawk: $(OBJS)
 	$(CC) $(OBJS) -lm -o $@
 
 clean:
-	$(RM) -f $(OBJS) y.tab.[ch] mksawk
+	$(RM) $(OBJS) y.tab.[ch] mksawk
