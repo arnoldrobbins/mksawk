@@ -70,7 +70,7 @@ static size_t	lexescape(wint_t endc, int regx, int cmd_line_operand);
 static void	awkierr(int perr, const char *fmt, va_list ap) __NORETURN;
 static int	usage(void);
 void		strescape(wchar_t *str);
-static const char	*toprint(wint_t);
+static const char	*toprint(wchar_t);
 char *_cmdname;
 static wchar_t *mbconvert(char *str);
 
@@ -1203,7 +1203,7 @@ awkierr(int perr, const char *fmt, va_list ap)
 			(void) fprintf(stderr, "NR=%lld): ",
 			    (INT)exprint(varNR));
 		else
-			(void) fprintf(stderr, "%s): ",
+			(void) fprintf(stderr, "%ls): ",
 			    phase == BEGIN ? s_BEGIN : s_END);
 	} else if (lineno != 0) {
 		(void) fprintf(stderr, gettext("file \"%s\": "), filename);
@@ -1315,7 +1315,7 @@ wcstombsdup(wchar_t *w)
 	char *mb;
 
 	/* Fetch memory for worst case string length */
-	n = wslen(w) + 1;
+	n = wcslen(w) + 1;
 	n *= MB_CUR_MAX;
 	if ((mb = (char *)malloc(n)) == NULL) {
 		return (NULL);
@@ -1490,7 +1490,7 @@ int_regwcomp(REGEXP *r, const wchar_t *pattern)
 	if ((rcp = malloc(sizeof (struct regcache))) == NULL)
 		return (REG_ESPACE);
 	rcp->re = re;
-	if ((rcp->pattern = wsdup(pattern)) == NULL) {
+	if ((rcp->pattern = wcsdup(pattern)) == NULL) {
 		regfree(&re);
 		free(rcp);
 		return (REG_ESPACE);
@@ -1627,8 +1627,6 @@ int_regwdosuba(REGEXP rp,	/* compiled RE: Pattern */
 	int regerr;
 
 /* handle overflow of dst. we need "i" more bytes */
-#ifdef OVERFLOW
-#undef OVERFLOW
 #define	OVERFLOW(i) { \
 		int pos = op - dst; \
 		dst = (wchar_t *)realloc(odst = dst, \
@@ -1638,7 +1636,6 @@ int_regwdosuba(REGEXP rp,	/* compiled RE: Pattern */
 		op = dst + pos; \
 		end = dst + len; \
 	}
-#endif
 
 	*dstp = dst = (wchar_t *)malloc(len * sizeof (wchar_t));
 	if (dst == NULL)

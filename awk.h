@@ -48,7 +48,7 @@
 #include <sys/types.h>
 #include <locale.h>
 #include <wchar.h>
-#include <widec.h>
+#include "portme.h"
 
 #define	YYMAXDEPTH	300	/* Max # of productions (used by yacc) */
 #define	YYSSIZE		300	/* Size of State/Value stacks (MKS YACC) */

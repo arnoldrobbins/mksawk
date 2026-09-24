@@ -887,7 +887,7 @@ exprstring(NODE *np)
 			return (STRING)lltoa((long long)np->n_int);
 		{
 			char *tmp;
-			(void) wsprintf(numbuf,
+			(void) wsprintf(numbuf, sizeof numbuf,
 		(const char *) (tmp = wcstombsdup(exprstring(varCONVFMT))),
 				(double)np->n_real);
 			if (tmp != NULL)

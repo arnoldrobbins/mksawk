@@ -737,7 +737,7 @@ xprintf(NODE *np, FILE *fp, wchar_t **cp)
 			continue;
 
 		case 'c':
-			*ofmtp++ = 'w';
+			*ofmtp++ = 'l';
 			*ofmtp++ = 'c';
 			*ofmtp = '\0';
 			fnp = exprreduce(nextarg(&np));
@@ -759,7 +759,7 @@ xprintf(NODE *np, FILE *fp, wchar_t **cp)
 				 * enough, just pass in INT_MAX as
 				 * the length.
 				 */
-				(void) wsprintf(bptr, (const char *) fmtbuf, c);
+				(void) wsprintf(bptr, cplen, (const char *) fmtbuf, c);
 				bptr += (slen = wcslen(bptr));
 				length += slen;
 			}
@@ -767,7 +767,7 @@ xprintf(NODE *np, FILE *fp, wchar_t **cp)
 /* XXXX Is this bogus? Figure out what s & S mean - look at original code */
 		case 's':
 		case 'S':
-			*ofmtp++ = 'w';
+			*ofmtp++ = 'l';
 			*ofmtp++ = 's';
 			*ofmtp = '\0';
 			if (bptr == (wchar_t *)NULL)
@@ -778,7 +778,7 @@ xprintf(NODE *np, FILE *fp, wchar_t **cp)
 
 				adjust_buf(cp, &cplen, &bptr, fmtbuf,
 				    wcslen(ts));
-				(void) wsprintf(bptr, (const char *) fmtbuf,
+				(void) wsprintf(bptr, cplen, (const char *) fmtbuf,
 				    ts);
 				bptr += (slen = wcslen(bptr));
 				length += slen;
@@ -803,7 +803,7 @@ xprintf(NODE *np, FILE *fp, wchar_t **cp)
 				    exprint(nextarg(&np)));
 			else {
 				adjust_buf(cp, &cplen, &bptr, fmtbuf, 0);
-				(void) wsprintf(bptr, (const char *) fmtbuf,
+				(void) wsprintf(bptr, cplen, (const char *) fmtbuf,
 				    exprint(nextarg(&np)));
 				bptr += (slen = wcslen(bptr));
 				length += slen;
@@ -823,7 +823,7 @@ xprintf(NODE *np, FILE *fp, wchar_t **cp)
 				    exprreal(nextarg(&np)));
 			else {
 				adjust_buf(cp, &cplen, &bptr, fmtbuf, 0);
-				(void) wsprintf(bptr, (const char *) fmtbuf,
+				(void) wsprintf(bptr, cplen, (const char *) fmtbuf,
 				    exprreal(nextarg(&np)));
 				bptr += (slen = wcslen(bptr));
 				length += slen;
@@ -846,7 +846,7 @@ xprintf(NODE *np, FILE *fp, wchar_t **cp)
 
 		default:
 			if (c == '\0') {
-				*ofmtp = (wchar_t)NULL;
+				*ofmtp = 0;
 				(void) fprintf(fp, "%s", fmtbuf);
 				continue;
 			} else {

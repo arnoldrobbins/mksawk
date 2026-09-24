@@ -368,7 +368,7 @@ f_split(NODE *np)
 	ep = exprstring(snp = getlist(&np));
 	tnp = getlist(&np);
 	if (snp->n_type == INDEX && snp->n_left == tnp)
-		ep = saved = wsdup(ep);
+		ep = saved = wcsdup(ep);
 	if (n == 3) {
 		sep = getlist(&np);
 	} else

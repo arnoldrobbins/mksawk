@@ -1,5 +1,13 @@
 2026-09-24         Arnold D. Robbins     <arnold@skeeve.com>
 
+	* awk0.c, awk1.c, awk2.c, awk3.c, awk4.c, awk.h: Adjustments
+	for Linux/GLIBC and replacement code.
+	* Makefile.illumos: Renamed from Makefile.
+	* Makefile: New file.
+	* portme.h, wsprintf.c: New files.
+
+2026-09-24         Arnold D. Robbins     <arnold@skeeve.com>
+
 	* awk0.c, awk1.c, awk2.c, awk3.c, awk4.c, awk.h,
 	awk.y, Makefile: Initial commit, from Illumos.
 	* README.md: Initial commit.
