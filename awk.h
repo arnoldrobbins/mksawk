@@ -43,6 +43,7 @@
 #include <math.h>
 #include <limits.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <regex.h>
 #include <errno.h>
 #include <sys/types.h>

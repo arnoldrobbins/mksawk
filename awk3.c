@@ -77,7 +77,7 @@ static int	exprtest(NODE *np);
 #endif
 #define	muloverflow()	if (((short)i1 != i1 || (short)i2 != i2) &&	\
 			    ((i2 != 0 && iresult/i2 != i1) ||		\
-			    (i1 == LONG_MIN && i2 == -1)))	  goto overflow
+			    (i1 == LLONG_MIN && i2 == -1)))	  goto overflow
 
 static char	notarray[] = "scalar \"%s\" cannot be used as array";
 static char	badarray[] = "array \"%s\" cannot be used as a scalar";
@@ -1503,8 +1503,9 @@ type_of(NODE *np)
 
 		default:
 			if (*cp == radixpoint) {
+				wchar_t *nextcp = cp + 1;
 				if (seenradix || seene || (!somedigits &&
-				    !iswdigit(*++cp)))
+				    !iswdigit(*nextcp)))
 					return (FSTRING);
 			} else
 				return (FSTRING);

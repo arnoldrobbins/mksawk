@@ -1021,7 +1021,7 @@ lexescape(wint_t endc, int regx, int cmd_line_operand)
 				 * it gets passed straight thru for possible
 				 * use in backreferencing.
 				 */
-				if (max == 3) {
+				if (max == 2) {
 					*cp++ = '\\';
 					n += '0';
 				}

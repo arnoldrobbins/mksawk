@@ -618,7 +618,7 @@ f_asort(NODE *np)
 	if (asortfunc == NNULL) {
 		running = 0;
 		asortfunc = node(CALLUFUNC, NNULL,
-				    node(COMMA, NNULL,
+				    node(COMMA, array,
 				    node(COMMA,
 					asnp1=stringnode(_null, FSTATIC, 0),
 					asnp2=stringnode(_null, FSTATIC, 0))));

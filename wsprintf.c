@@ -12,18 +12,23 @@
 #include <stdlib.h>
 
 int
-wsprintf(wchar_t *s, size_t sz, const char *format, va_list args)
+wsprintf(wchar_t *s, size_t sz, const char *format, ...)
 {
 	size_t n = strlen(format);
 	wchar_t *wformat = malloc((n + 1) * sizeof(wchar_t));
 	int i;
 	int ret;
+	va_list args;
+
+	va_start(args, format);
 
 	for (i = 0; i < n; i++)
 		wformat[i] = format[i];
 	wformat[i] = L'\0';
 
 	ret = vswprintf(s, sz, wformat, args);
+
+	va_end(args);
 
 	free(wformat);
 
